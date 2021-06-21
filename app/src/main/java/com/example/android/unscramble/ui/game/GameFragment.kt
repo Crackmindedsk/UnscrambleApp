@@ -23,7 +23,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.android.unscramble.R
 import com.example.android.unscramble.databinding.GameFragmentBinding
+import androidx.fragment.app.viewModels
 
+private val viewModel:GameViewModel by viewModels()
 /**
  * Fragment where the game is played, contains the game logic.
  */
@@ -59,8 +61,7 @@ class GameFragment : Fragment() {
         // Update the UI
         updateNextWordOnScreen()
         binding.score.text = getString(R.string.score, 0)
-        binding.wordCount.text = getString(
-                R.string.word_count, 0, MAX_NO_OF_WORDS)
+        binding.wordCount.text = getString(R.string.word_count, 0, MAX_NO_OF_WORDS)
     }
 
     /*
@@ -131,6 +132,6 @@ class GameFragment : Fragment() {
      * Displays the next scrambled word on screen.
      */
     private fun updateNextWordOnScreen() {
-        binding.textViewUnscrambledWord.text = currentScrambledWord
+        binding.textViewUnscrambledWord.text=viewModel.currentScrambledWord
     }
 }
