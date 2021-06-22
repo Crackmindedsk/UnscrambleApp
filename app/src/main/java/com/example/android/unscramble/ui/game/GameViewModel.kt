@@ -13,9 +13,14 @@ class GameViewModel: ViewModel() {
     private lateinit var _currentScrambledWord:String
     val currentScrambledWord:String
     get() = _currentScrambledWord
+
     private var _count=0
     val count:Int
     get() = _count
+
+    private var _score=0
+    val score:Int
+    get() = _score
 
     override fun onCleared(){
         super.onCleared()
