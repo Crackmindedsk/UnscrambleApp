@@ -17,7 +17,6 @@
 package com.example.android.unscramble.ui.game
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -52,7 +51,6 @@ class GameFragment : Fragment() {
     ): View {
         // Inflate the layout XML file and return a binding object instance
         binding = DataBindingUtil.inflate(inflater, R.layout.game_fragment,container, false)
-        Log.d("GameFragment", "GameFragment created/re-created!")
         return binding.root
     }
 
@@ -74,19 +72,13 @@ class GameFragment : Fragment() {
     * Displays the next scrambled word.
     */
     private fun onSubmitWord() {
-//        currentScrambledWord = getNextScrambledWord()
-//        currentWordCount++
-//        score += SCORE_INCREASE
-//        binding.wordCount.text = getString(R.string.word_count, currentWordCount, MAX_NO_OF_WORDS)
-//        binding.score.text = getString(R.string.score, score)
-//        setErrorTextField(false)
-//        updateNextWordOnScreen()
+//
         val playerWord=binding.textInputEditText.text.toString()
 
         if (viewModel.isUserWordCorrect(playerWord)){
             setErrorTextField(false)
             if (!viewModel.nextWord()) {
-//                updateNextWordOnScreen()
+//
                 showFinalScoreDialog()
             }
         }else{
@@ -100,27 +92,14 @@ class GameFragment : Fragment() {
      * Increases the word count.
      */
     private fun onSkipWord() {
-//        currentScrambledWord = getNextScrambledWord()
-//        currentWordCount++
-//        binding.wordCount.text = getString(R.string.word_count, currentWordCount, MAX_NO_OF_WORDS)
-//        setErrorTextField(false)
-//        updateNextWordOnScreen()
+//
         if(viewModel.nextWord()){
             setErrorTextField(false)
-//            updateNextWordOnScreen()
+//
         }else{
             showFinalScoreDialog()
         }
 
-    }
-
-    /*
-     * Gets a random word for the list of words and shuffles the letters in it.
-     */
-    private fun getNextScrambledWord(): String {
-        val tempWord = allWordsList.random().toCharArray()
-        tempWord.shuffle()
-        return String(tempWord)
     }
 
     /*
@@ -140,11 +119,6 @@ class GameFragment : Fragment() {
         activity?.finish()
     }
 
-    override fun onDetach(){
-        super.onDetach()
-        Log.d("GameFragment", "GameFragment destroyed!")
-    }
-
     /*
     * Sets and resets the text field error status.
     */
@@ -158,12 +132,6 @@ class GameFragment : Fragment() {
         }
     }
 
-    /*
-     * Displays the next scrambled word on screen.
-     */
-//    private fun updateNextWordOnScreen() {
-//        binding.textViewUnscrambledWord.text=viewModel.currentScrambledWord
-//    }
     /*
     Creates and shows an alertdialogs with the final score.
      */

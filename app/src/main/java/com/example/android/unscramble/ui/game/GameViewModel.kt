@@ -1,6 +1,5 @@
 package com.example.android.unscramble.ui.game
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,10 +7,10 @@ import androidx.lifecycle.ViewModel
 class GameViewModel: ViewModel() {
 
     private val _currentWordCount=MutableLiveData(0)
-    val currentWOrdCount:LiveData<Int>
+    val currentWordCount:LiveData<Int>
     get() = _currentWordCount
 
-    private lateinit var _currentScrambledWord:MutableLiveData<String>
+    private val _currentScrambledWord= MutableLiveData<String>()
     val currentScrambledWord: LiveData<String>
     get() = _currentScrambledWord
 
@@ -23,17 +22,12 @@ class GameViewModel: ViewModel() {
     val score:LiveData<Int>
     get() = _score
 
-    override fun onCleared(){
-        super.onCleared()
-        Log.d("GameFragment","GameViewModel destroyed!")
-    }
-
-    private val wordList:MutableList<String> = mutableListOf()
+    private var wordList:MutableList<String> = mutableListOf()
     private lateinit var currentWord:String
     init {
-        Log.d("Game Fragment","GameViewModel created!")
         getNextWord()
     }
+
     private fun getNextWord(){
         currentWord= allWordsList.random()
         val tempWord=currentWord.toCharArray()
@@ -46,7 +40,7 @@ class GameViewModel: ViewModel() {
             getNextWord()
         else {
             _currentScrambledWord.value = String(tempWord)
-            _currentWordCount.value=(_currentWordCount.value)?.inc()
+            _currentWordCount.value=_currentWordCount.value?.inc()
             wordList.add(currentWord)
         }
 
@@ -58,9 +52,11 @@ class GameViewModel: ViewModel() {
             true
         }else false
     }
+
     private fun increaseScore(){
-        _score.value=(_score.value)?.plus(SCORE_INCREASE)
+        _score.value=_score.value?.plus(SCORE_INCREASE)
     }
+
     fun isUserWordCorrect(playerWord:String):Boolean{
         if (playerWord.equals(currentWord,true)){
             increaseScore()
@@ -77,7 +73,5 @@ class GameViewModel: ViewModel() {
         wordList.clear()
         getNextWord()
     }
-
-
 }
 
