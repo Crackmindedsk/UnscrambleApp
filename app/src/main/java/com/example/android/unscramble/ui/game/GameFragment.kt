@@ -60,6 +60,7 @@ class GameFragment : Fragment() {
         binding.gameViewModel=viewModel
         binding.maxNoOfWords= MAX_NO_OF_WORDS
         binding.lifecycleOwner=viewLifecycleOwner
+        binding.wordAnswer.text=null
         // Setup a click listener for the Submit and Skip buttons.
         binding.submit.setOnClickListener { onSubmitWord() }
         binding.skip.setOnClickListener { onSkipWord() }
@@ -96,7 +97,9 @@ class GameFragment : Fragment() {
      * Increases the word count.
      */
     private fun onSkipWord() {
-//
+//        binding.wordAnswer.text=getString(R.string.answer,viewModel.correctWord)
+        answerDialogue()
+        
         if(viewModel.nextWord()){
             setErrorTextField(false)
 //
@@ -130,6 +133,7 @@ class GameFragment : Fragment() {
         if (error) {
             binding.textField.isErrorEnabled = true
             binding.textField.error = getString(R.string.try_again)
+            binding.textInputEditText.text=null
         } else {
             binding.textField.isErrorEnabled = false
             binding.textInputEditText.text = null
@@ -148,4 +152,13 @@ class GameFragment : Fragment() {
             .setPositiveButton(getString(R.string.play_again)){_,_->restartGame()}
             .show()
     }
+    private fun answerDialogue(){
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle("Correct Answer :")
+            .setMessage(getString(R.string.answer,viewModel.correctWord))
+            .setCancelable(true)
+            .show()
+    }
 }
+
+

@@ -29,6 +29,7 @@ class GameViewModel : ViewModel() {
         getNextWord()
     }
 
+    lateinit var correctWord:String
     private fun getNextWord() {
         currentWord = allWordsList.random()
         val tempWord = currentWord.toCharArray()
@@ -43,12 +44,14 @@ class GameViewModel : ViewModel() {
             _currentScrambledWord.value = String(tempWord)
             _currentWordCount.value = _currentWordCount.value?.inc()
             wordList.add(currentWord)
+            correctWord=currentWord
         }
 
     }
 
     fun nextWord(): Boolean {
         return if (_currentWordCount.value!! < MAX_NO_OF_WORDS) {
+
             getNextWord()
             true
         } else false

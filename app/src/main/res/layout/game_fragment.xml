@@ -126,6 +126,19 @@
                 android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/default_margin"
+            android:id="@+id/word_answer"
+            android:textSize="40sp"
+            app:layout_constraintTop_toBottomOf="@id/submit"
+            android:text="@string/answer"
+            android:textColor="@color/red_700"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
 </layout>
